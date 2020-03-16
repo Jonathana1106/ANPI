@@ -11,36 +11,32 @@ close all;
     Salidas
       @return xAprox: valor aproximado de x
       @return iter: iteraciones necesarias para aproximar x
-    %}
+%}
 
 function [xAprox, iter] = bisection (a, b, tol, f)
-
-    % Validar la condicion para encontrar el cero
+  % Validar la condicion para encontrar el cero
     if (f(a) * f(b) < 0)
-        % Valor inicial de x
+      % Valor inicial de x
+      xAprox = (a + b) / 2;
+      iter = 0;
+      % Repetir hasta que el x se acerque al cero
+      while (abs(f(xAprox)) > tol)
+        % Verificar cual es el nuevo intervalo de la funcion
+        if (f(a) * f(xAprox) < 0)
+          b = xAprox;
+        else
+          a = xAprox;
+        endif
+        % Actualizar el valor de x y de las iteraciones
         xAprox = (a + b) / 2;
-        iter = 0;
-        
-        % Repetir hasta que el x se acerque al cero
-        while (abs(f(xAprox)) > tol)
-            % Verificar cual es el nuevo intervalo de la funcion
-            if (f(a) * f(xAprox) < 0)
-                b = xAprox;
-            else
-                a = xAprox;
-            endif
-
-            % Actualizar el valor de x y de las iteraciones
-            xAprox = (a + b) / 2;
-            iter = iter + 1;
-        endwhile
+        iter = iter + 1;
+      endwhile
     else
-        error("Condiciones no garantizan el cero de la funcion");
+      error("Condiciones no garantizan el cero de la funcion");
     endif
-
     return;
 endfunction
-
+  
 
 % Main
 % Limites

@@ -1,12 +1,12 @@
 #Metodo de la Secante
 #Entradas:
-            #func: es la funcion a analizar
-            #xk_1(float): valor inicial en la iteracion 0
-            #xk(float): valor inicial en la iteracion 1
-            #tol(float): es la tolerancia del algoritmo
+    #func: es la funcion a analizar
+    #xk_1: valor inicial en la iteracion 0
+    #xk: valor inicial en la iteracion 1
+    #tol: es la tolerancia del algoritmo
 #Salidas:
-            #xk(float): es la solucion, valor aproximado de x
-            #_iter(int): es el numero de iteraciones
+    #xk: es la solucion, valor aproximado de x
+    #_iter: es el numero de iteraciones
 
 import math
 

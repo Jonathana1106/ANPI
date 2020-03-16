@@ -1,16 +1,19 @@
 #Metodo de la Biseccion
 #Entradas:
             #func: es la funcion a analizar
-            #a(float): es "a" valor inferior en el intervalo de la funcion [a, b]
-            #b(float): es "b" valor superior en el intervalo de la funcion [a, b]
-            #tol(float): es la tolerancia del algoritmo
+            #a: es "a" valor inferior en el intervalo de la funcion [a, b]
+            #b: es "b" valor superior en el intervalo de la funcion [a, b]
+            #tol: es la tolerancia del algoritmo
 #Salidas:
-            #xAprox(float): es la solucion, valor aproximado de x
-            #_iter(int): es el numero de iteraciones
+            #xAprox: es la solucion, valor aproximado de x
+            #_iter: es el numero de iteraciones
 
 import math
+import matplotlib.pyplot
 
 def bisection(func, a, b, tol):
+    aprox = []
+    it =[]
     # Validar la condicion para encontrar el cero
     if (func(a) * func(b) < 0):
         # Valor inicial de x
@@ -27,10 +30,12 @@ def bisection(func, a, b, tol):
 
             # Actualizar el valor de x y de las iteraciones
             xAprox = (a + b) / 2
+            aprox.append(xAprox)
             _iter += 1
+            it.append(_iter)
     else:
         raise ValueError("Las condiciones no garantizan el cero de la función")
-
+    matplotlib.pyplot.plot(xAprox, _iter)
     return xAprox, _iter
 
 # Prueba

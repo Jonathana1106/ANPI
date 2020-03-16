@@ -9,30 +9,26 @@ close all;
 
     @return xAprox: valor aproximado de x
     @return iter: iteraciones necesarias para aproximar x
-    %}
+%}
 
 function [xAprox, iter] = newtonRaphson (func, x0, tol)
-
-    % Valor incial de x
-    xAprox(1) = x0;
-    iter = 0;
-
-    % Convertir la funcion a programacion simbolica
-    syms f(x);
-    f(x) = func;
-    
-    % Repetir hasta que x se haya acercado al cero de la funcion
-    while (abs(func(xAprox(end))) > tol)
-        % Obtener el valor de xk
-        xk = xAprox(end);
-        % Derivar la funcion
-        df = diff(f);
-        % Actualizar el valor de x y las iteraciones
-        xAprox(end + 1) = xk - func(xk) / double(df(xk));
-        iter = iter + 1;
-    endwhile
-
-    return;
+  % Valor incial de x
+  xAprox(1) = x0;
+  iter = 0;
+  % Convertir la funcion a programacion simbolica
+  syms f(x);
+  f(x) = func;
+  % Repetir hasta que x se haya acercado al cero de la funcion
+  while (abs(func(xAprox(end))) > tol)
+    % Obtener el valor de xk
+    xk = xAprox(end);
+    % Derivar la funcion
+    df = diff(f);
+    % Actualizar el valor de x y las iteraciones
+    xAprox(end + 1) = xk - func(xk) / double(df(xk));
+    iter = iter + 1;
+  endwhile
+  return;
 endfunction
 
 

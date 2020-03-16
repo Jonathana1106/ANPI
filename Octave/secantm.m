@@ -11,24 +11,21 @@ close all;
     Salidas
       @return xk: valor aproximado de x en la iteracion k
       @return iter: iteraciones necesarias para aproximar x
-    %}
+%}
 
 function [xk, iter] = secant (xk_1, xk, tol, f)
-
-    iter = 1;
-
-    % Repetir hasta que x el error sea mas pequenio que la tolerancia
-    while (abs(xk - xk_1) / abs(xk)) > tol
-        % Nuevo valor de x
-        xTemp = xk - (xk - xk_1) / (f(xk) - f(xk_1)) * f(xk);
-        % Actualizar el valor anterior y el valor actual
-        xk_1 = xk;
-        xk = xTemp;
-        % Actualizar las iteraciones
-        iter = iter + 1;
-    endwhile
-
-    return;
+  iter = 1;
+  % Repetir hasta que x el error sea mas pequenio que la tolerancia
+  while (abs(xk - xk_1) / abs(xk)) > tol
+    % Nuevo valor de x
+    xTemp = xk - (xk - xk_1) / (f(xk) - f(xk_1)) * f(xk);
+    % Actualizar el valor anterior y el valor actual
+    xk_1 = xk;
+    xk = xTemp;
+    % Actualizar las iteraciones
+    iter = iter + 1;
+  endwhile
+  return;
 endfunction
 
 

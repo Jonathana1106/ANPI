@@ -1,11 +1,11 @@
 #Metodo de Newton-Raphson
 #Entradas:
-            #func(string): es la funcion a analizar
-            #x0(float): valor inicial
-            #tol(float): es la tolerancia del algoritmo
+    #func: es la funcion a analizar
+    #x0: valor inicial
+    #tol: es la tolerancia del algoritmo
 #Salidas:
-            #xAprox(float): es la solucion, valor aproximado de x
-            #_iter(int): es el numero de iteraciones
+    #xAprox: es la solucion, valor aproximado de x
+    #_iter: es el numero de iteraciones
 
 import math
 import numpy as np
