@@ -1,0 +1,12 @@
+Name: NumInt
+Version: 1.5.0
+Date: 2020-08-03
+Author: Jonathan Guzman Araya <jonathana1196@gmail.com>
+Maintainer: Jonathan Guzman Araya <jonathana1196@gmail.com>
+Title: Numerical Integration Package using Symbolic
+Description: Perform a symbolic calculation to approximate the numerical value of a definite integral at intervals [a, b] for a function f (x).
+Categories: Numerical Integration
+Depends: octave (>= 4.2.0)
+SystemRequirements: python, sympy (>= 1.2), mpmath (>= 1.0)
+License: GPLv3+
+Url: https://github.com/Jonathana1196/ANPI
