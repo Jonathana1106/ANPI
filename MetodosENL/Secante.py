@@ -27,7 +27,7 @@ def secante(func, x0, x1, MAXIT, TOL):
 
         xAprox = x1 - ((x1 - x0)/(func(x1) - func(x0)))  * func(x1)
 
-        err = abs(xAprox - x1)/(xAprox)
+        err = abs(xAprox - x1)/abs(xAprox)
         iterl.append(itera)
         errl.append(err)
         itera = itera + 1

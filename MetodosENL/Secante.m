@@ -1,5 +1,5 @@
 %{
-    Metodo de la Biseccion
+    Metodo de la Secante
     Parametros de Entrada
     @param func: funcion a la cual se le aplicara el algoritmo
     @param x0: primer valor inicial

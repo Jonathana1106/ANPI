@@ -1,7 +1,7 @@
 # Metodo de Newton-Raphson
 # Entradas:
             # func: es la funcion a analizar
-            # x0: valor iniciar
+            # x0: valor inicial
             # MAXIT: es la cantidad de iteraciones máximas a realizar
             # TOL: es la tolerancia del algoritmo
 # Salidas:
