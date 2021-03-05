@@ -2,7 +2,7 @@
 # Entradas:
             # func: es la funcion a analizar
             # x0: valor inicial
-            # MAXIT: es la cantidad de iteraciones máximas a realizar
+            # MAXIT: es la cantidad de iteraciones maximas a realizar
             # TOL: es la tolerancia del algoritmo
 # Salidas:
             # xAprox: es la solucion, valor aproximado de x
