@@ -42,10 +42,7 @@ function [r, err] = muller(func, x0, x1, x2, MAXIT, TOL)
         iter = iter + 1;
         
         if(err < TOL)
-            plot(iterl, errl);
-            title("Metodo de Muller");
-            xlabel("Iteraciones");
-            ylabel("% Error");
+            grafica(iterl, errl);
             return;
         endif
 
@@ -61,11 +58,15 @@ function [r, err] = muller(func, x0, x1, x2, MAXIT, TOL)
         x2 =  r;
     endwhile
 
-    plot(iterl, errl);
+    grafica(iterl, errl);
+    return;
+endfunction
+
+function grafica(listaValoresX, listValoresY)
+    plot(listaValoresX, listValoresY, 'bx');
     title("Metodo de Muller");
     xlabel("Iteraciones");
     ylabel("% Error");
-    return;
 endfunction
 
 %Valores iniciales

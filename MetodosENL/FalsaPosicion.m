@@ -37,10 +37,7 @@ function [xAprox, err] = falsaPosicion(func, x0, x1, MAXIT, TOL)
                 errl(iter) = err;
                 
                 if(err < TOL)
-                  plot(iterl, errl, 'bx');
-                  title("Metodo de la Falsa Posicion");
-                  xlabel("Iteraciones");
-                  ylabel("% Error");
+                  grafica(iterl, errl);
                   return;
                 else
                     iter = iter + 1;
@@ -49,10 +46,7 @@ function [xAprox, err] = falsaPosicion(func, x0, x1, MAXIT, TOL)
                 endif
             endwhile
 
-            plot(iterl, errl, 'bx');
-            title("Metodo de la Falsa Posicion");
-            xlabel("Iteraciones");
-            ylabel("% Error");
+            grafica(iterl, errl);
             return;
 
         elseif(func(x2) * func(b) < 0)
@@ -64,10 +58,7 @@ function [xAprox, err] = falsaPosicion(func, x0, x1, MAXIT, TOL)
                 errl(iter) = err;
                 
                 if(err < TOL)
-                  plot(iterl, errl, 'bx');
-                  title("Metodo de la Falsa Posicion");
-                  xlabel("Iteraciones");
-                  ylabel("% Error");
+                  grafica(iterl, errl);
                   return;
                 else
                     iter = iter + 1;
@@ -76,10 +67,7 @@ function [xAprox, err] = falsaPosicion(func, x0, x1, MAXIT, TOL)
                 endif
             endwhile
 
-            plot(iterl, errl, 'bx');
-            title("Metodo de la Falsa Posicion");
-            xlabel("Iteraciones");
-            ylabel("% Error");
+            grafica(iterl, errl);
         else
             error("Condiciones en los parametros de entrada no garantizan el cero de la funcion.")
         endif
@@ -87,6 +75,13 @@ function [xAprox, err] = falsaPosicion(func, x0, x1, MAXIT, TOL)
         error("Condiciones en los parametros de entrada no garantizan el cero de la funcion.")
     endif
     return;
+endfunction
+
+function grafica(listaValoresX, listValoresY)
+    plot(listaValoresX, listValoresY, 'bx');
+    title("Metodo de la Falsa Posicion");
+    xlabel("Iteraciones");
+    ylabel("% Error");
 endfunction
 
 x0 = 1/2;

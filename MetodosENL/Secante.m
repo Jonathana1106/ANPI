@@ -29,10 +29,7 @@ function [xAprox, err] = secante(func, x0, x1, MAXIT, TOL)
         errl(iter-1) = err;
         
         if(err < TOL)
-          plot(iterl, errl);
-          title("Metodo de la Secante");
-          xlabel("Iteraciones");
-          ylabel("% Error");
+          grafica(iterl, errl);
           return;
         else
           iter = iter + 1;
@@ -40,11 +37,15 @@ function [xAprox, err] = secante(func, x0, x1, MAXIT, TOL)
           x1 =  xAprox;
         endif
     endwhile
-    plot(iterl, errl);
+    grafica(iterl, errl);
+    return;
+endfunction
+
+function grafica(listaValoresX, listValoresY)
+    plot(listaValoresX, listValoresY, 'bx');
     title("Metodo de la Secante");
     xlabel("Iteraciones");
     ylabel("% Error");
-    return;
 endfunction
 
 %Valores iniciales

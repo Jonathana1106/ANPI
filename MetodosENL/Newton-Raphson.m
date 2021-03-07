@@ -33,20 +33,21 @@ function [xAprox, err] = newtonRaphson(func, x0, MAXIT, TOL)
         errl(iter) = err;
         
         if(err < TOL)
-          plot(iterl, errl, 'bx');
-          title("Metodo de Newton-Raphson");
-          xlabel("Iteraciones");
-          ylabel("% Error");
+          grafica(iterl, errl);
           return;
         else
             iter = iter + 1;
         endif
     endwhile
-    plot(iterl, errl, 'bx');
+    grafica(iterl, errl);
+    return;
+endfunction
+
+function grafica(listaValoresX, listValoresY)
+    plot(listaValoresX, listValoresY, 'bx');
     title("Metodo de Newton-Raphson");
     xlabel("Iteraciones");
     ylabel("% Error");
-    return;
 endfunction
 
 %Valor inicial
