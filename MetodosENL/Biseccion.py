@@ -12,17 +12,15 @@
 ########################################################################################
 import math
 import matplotlib.pyplot as plt
-import numpy as np
-import sys
 ########################################################################################
 
 def biseccion(func, a, b, MAXIT, TOL):
 
     if(func(a) * func(b) < 0):
-        itera = 0
-        err = 0
-        iterl = []
-        errl = []
+        itera = 1
+        err = 1
+        iterl = [] # Lista que almacena el numero de iteraciones para despues graficar
+        errl = [] # Lista que almacena el % de error de cada iteracion para despues graficar
 
         while(itera < MAXIT):
             xAprox = (a + b) / 2
@@ -32,34 +30,40 @@ def biseccion(func, a, b, MAXIT, TOL):
                 b = xAprox
             elif(func(b) * fx < 0):
                 a = xAprox
-            elif(abs(fx) < TOL):
-                plt.plot(iterl, errl)
-                plt.xlabel("Iteraciones")
-                plt.ylabel("% Error")
-                plt.title("Metodo de la Biseccion")
-                plt.show()
-                return xAprox, itera
 
             iterl.append(itera)
             errl.append(err)
-
             itera = itera + 1
-            err = (b - a) / (2)
-    else:
-        print("Las condiciones  no garantizan el cero de la funcion")
+            err = (b - a) / (2)**(itera-1)
 
+            if(err < TOL):
+                plt.plot(iterl, errl, 'bx')
+                plt.title("Metodo de la Biseccion")
+                plt.xlabel("Iteraciones")
+                plt.ylabel("% Error")
+                plt.show()
+                return xAprox, err
+
+        plt.plot(iterl, errl, 'bx')
+        plt.title("Metodo de la Biseccion")
+        plt.xlabel("Iteraciones")
+        plt.ylabel("% Error")
+        plt.show()
+        return xAprox, err
+    else:
+        raise ValueError("Las condiciones  no garantizan el cero de la funcion.")
 
 if __name__ == '__main__':
-    #Limites
+    #Intervalos
     a = 0
     b = 2
     #Tolerancia
-    TOL = 0.000001
+    TOL = 0.0001
     #Maximo iteraciones
     MAXIT = 100
     #Funcion
     func = lambda x: math.e**x - x - 2
     #Llamado de la funcion
-    xAprox, iter = biseccion(func, a, b, MAXIT, TOL)
+    xAprox, err = biseccion(func, a, b, MAXIT, TOL)
     #print(xAprox)
-    print('xAprox = {}\nIteraciones = {}'.format(xAprox, iter))
+    print('xAprox = {}\n%Error = {}'.format(xAprox, err))

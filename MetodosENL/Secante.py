@@ -11,47 +11,51 @@
 ########################################################################################
 import math
 import matplotlib.pyplot as plt
-from scipy.misc import derivative
-import numpy as np
-import sys
 ########################################################################################
 
 def secante(func, x0, x1, MAXIT, TOL):
-    itera = 0
+    itera = 2
     err = 1
-    iterl = []
-    errl = []
-    xAprox = x0;
+    iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
+    errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
+    xAprox = x0
 
-    while(err > TOL):
+    while(itera < MAXIT):
 
         xAprox = x1 - ((x1 - x0)/(func(x1) - func(x0)))  * func(x1)
-
         err = abs(xAprox - x1)/abs(xAprox)
         iterl.append(itera)
         errl.append(err)
-        itera = itera + 1
 
-        x0 = x1
-        x1 = xAprox
+        if(err < TOL):
+            plt.plot(iterl, errl, 'bx')
+            plt.title("Metodo de la Secante")
+            plt.xlabel("Iteraciones")
+            plt.ylabel("% Error")
+            plt.show()
+            return xAprox, err
+        else:
+            itera = itera + 1
+            x0 = x1
+            x1 = xAprox
 
-    plt.plot(iterl, errl)
+    plt.plot(iterl, errl, 'bx')
+    plt.title("Metodo de la Secante")
     plt.xlabel("Iteraciones")
     plt.ylabel("% Error")
-    plt.title("Metodo de la Secante")
     plt.show()
-    return xAprox, itera
+    return xAprox, err
 
 if __name__ == '__main__':
-    # Valor inicial
+    # Valores iniciales
     x0 = 0
     x1 = 1
     # Tolerancia
-    TOL = 0.0001
+    TOL = 0.01
     # Maximo iteraciones
     MAXIT = 100
     # Funcion
     func = lambda x: (math.e)**(-(x**2)) - x
     # Llamado de la funcion
-    xAprox, itera = secante(func, x0, x1, MAXIT, TOL)
-    print('xAprox = {}\nIteraciones = {}'.format(xAprox, itera))
+    xAprox, err = secante(func, x0, x1, MAXIT, TOL)
+    print('xAprox = {}\n%Error = {}'.format(xAprox, err))
