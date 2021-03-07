@@ -38,6 +38,12 @@ def newtonRaphson(func, x0, MAXIT, TOL):
     grafica(iterl, errl)
     return xAprox, err
 
+#Grafica
+#Entradas:
+            #listaValoresX: valores que se graficaran en el eje 'x'
+            #listaValoresY: valores que se graficaran en el eje 'y'
+#Salidas:
+            #Grafico con lo valores ingresados
 def grafica(listaValoresX, listaValoresY):
     plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de Newton-Raphson")

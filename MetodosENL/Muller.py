@@ -63,6 +63,12 @@ def muller(func, x0, x1, x2, MAXIT, TOL):
     grafica(iterl, errl)
     return r, err
 
+#Grafica
+#Entradas:
+            #listaValoresX: valores que se graficaran en el eje 'x'
+            #listaValoresY: valores que se graficaran en el eje 'y'
+#Salidas:
+            #Grafico con lo valores ingresados
 def grafica(listaValoresX, listaValoresY):
     plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de Muller")

@@ -44,6 +44,12 @@ def biseccion(func, a, b, MAXIT, TOL):
     else:
         raise ValueError("Las condiciones  no garantizan el cero de la funcion.")
 
+#Grafica
+#Entradas:
+            #listaValoresX: valores que se graficaran en el eje 'x'
+            #listaValoresY: valores que se graficaran en el eje 'y'
+#Salidas:
+            #Grafico con lo valores ingresados
 def grafica(listaValoresX, listaValoresY):
     plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de la Biseccion")
