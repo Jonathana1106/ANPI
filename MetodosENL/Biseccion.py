@@ -37,21 +37,19 @@ def biseccion(func, a, b, MAXIT, TOL):
             err = (b - a) / (2)**(itera-1)
 
             if(err < TOL):
-                plt.plot(iterl, errl, 'bx')
-                plt.title("Metodo de la Biseccion")
-                plt.xlabel("Iteraciones")
-                plt.ylabel("% Error")
-                plt.show()
+                grafica(iterl, errl)
                 return xAprox, err
-
-        plt.plot(iterl, errl, 'bx')
-        plt.title("Metodo de la Biseccion")
-        plt.xlabel("Iteraciones")
-        plt.ylabel("% Error")
-        plt.show()
+        grafica(iterl, errl)
         return xAprox, err
     else:
         raise ValueError("Las condiciones  no garantizan el cero de la funcion.")
+
+def grafica(listaValoresX, listaValoresY):
+    plt.plot(listaValoresX, listaValoresY, 'bx')
+    plt.title("Metodo de la Biseccion")
+    plt.xlabel("Iteraciones")
+    plt.ylabel("% Error")
+    plt.show()
 
 if __name__ == '__main__':
     #Intervalos

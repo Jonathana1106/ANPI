@@ -36,22 +36,14 @@ def falsaPosicion(func, x0, x1, MAXIT, TOL):
                 errl.append(err)
 
                 if (err < TOL):
-                    plt.plot(iterl, errl, 'bx')
-                    plt.title("Metodo de la Falsa Posicion")
-                    plt.xlabel("Iteraciones")
-                    plt.ylabel("% Error")
-                    plt.show()
+                    grafica(iterl, errl)
                     return xAprox, err
                 else:
                     itera = itera + 1
                     a = x2
                     x2 = xAprox
 
-            plt.plot(iterl, errl, 'bx')
-            plt.title("Metodo de la Falsa Posicion")
-            plt.xlabel("Iteraciones")
-            plt.ylabel("% Error")
-            plt.show()
+            grafica(iterl, errl)
             return xAprox, err
 
         elif (func(x2) * func(b) < 0):
@@ -63,27 +55,26 @@ def falsaPosicion(func, x0, x1, MAXIT, TOL):
                 errl.append(err)
 
                 if (err < TOL):
-                    plt.plot(iterl, errl, 'bx')
-                    plt.title("Metodo de la Falsa Posicion")
-                    plt.xlabel("Iteraciones")
-                    plt.ylabel("% Error")
-                    plt.show()
+                    grafica(iterl, errl)
                     return xAprox, err
                 else:
                     itera = itera + 1
                     x2 = b
                     b = xAprox
-                    
-            plt.plot(iterl, errl, 'bx')
-            plt.title("Metodo de la Falsa Posicion")
-            plt.xlabel("Iteraciones")
-            plt.ylabel("% Error")
-            plt.show()
+
+            grafica(iterl, errl)
             return xAprox, err
         else:
             raise ValueError("Las condiciones no garantizan el cero de la funcion")
     else:
         raise ValueError("Las condiciones no garantizan el cero de la funcion")
+
+def grafica(listaValoresX, listaValoresY):
+    plt.plot(listaValoresX, listaValoresY, 'bx')
+    plt.title("Metodo de la Falsa Posicion")
+    plt.xlabel("Iteraciones")
+    plt.ylabel("% Error")
+    plt.show()
 
 if __name__ == '__main__':
     # Intervalos

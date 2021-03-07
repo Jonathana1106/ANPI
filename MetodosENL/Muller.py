@@ -47,11 +47,7 @@ def muller(func, x0, x1, x2, MAXIT, TOL):
         itera = itera + 1
 
         if(err < TOL):
-            plt.plot(iterl, errl, 'bx')
-            plt.title("Metodo de Muller")
-            plt.xlabel("Iteraciones")
-            plt.ylabel("% Error")
-            plt.show()
+            grafica(iterl, errl)
             return r, err
 
         x0Dist = abs(r - x0)
@@ -64,12 +60,15 @@ def muller(func, x0, x1, x2, MAXIT, TOL):
             x1 = x2
 
         x2 = r
-    plt.plot(iterl, errl, 'bx')
+    grafica(iterl, errl)
+    return r, err
+
+def grafica(listaValoresX, listaValoresY):
+    plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de Muller")
     plt.xlabel("Iteraciones")
     plt.ylabel("% Error")
     plt.show()
-    return r, err
 
 if __name__ == '__main__':
     # Valores iniciales

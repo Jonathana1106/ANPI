@@ -30,21 +30,20 @@ def newtonRaphson(func, x0, MAXIT, TOL):
         errl.append(err)
 
         if(err < TOL):
-            plt.plot(iterl, errl, 'bx')
-            plt.title("Metodo de Newton-Raphson")
-            plt.xlabel("Iteraciones")
-            plt.ylabel("% Error")
-            plt.show()
+            grafica(iterl, errl)
             return xAprox, err
         else:
             itera = itera + 1
 
-    plt.plot(iterl, errl, 'bx')
+    grafica(iterl, errl)
+    return xAprox, err
+
+def grafica(listaValoresX, listaValoresY):
+    plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de Newton-Raphson")
     plt.xlabel("Iteraciones")
     plt.ylabel("% Error")
     plt.show()
-    return xAprox, err
 
 if __name__ == '__main__':
     # Valor inicial
