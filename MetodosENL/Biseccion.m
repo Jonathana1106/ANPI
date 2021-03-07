@@ -52,8 +52,16 @@ function [xAprox, err] = biseccion(f, a, b, MAXIT, TOL)
     return;
 endfunction
 
-function grafica(listaValoresX, listValoresY)
-    plot(listaValoresX, listValoresY, 'bx');
+%{
+    Parametros de Entrada
+        @param listaValoresX: valores del eje 'x'
+        @param listaValoresY: valores del eje 'y'
+    
+    Parametros de Salida
+        @return: Grafico de los datos ingresados
+%}
+function grafica(listaValoresX, listaValoresY)
+    plot(listaValoresX, listaValoresY, 'bx');
     title("Metodo de la Biseccion");
     xlabel("Iteraciones");
     ylabel("% Error");
