@@ -32,10 +32,10 @@ function [r, err] = muller(func, x0, x1, x2, MAXIT, TOL)
 
         if(discriminante < 0)
             error("Error, la solucion no es real.")
-            return
+            return;
         endif
 
-        r = x2 - (2*c) / (b + (sign(b))*(sqrt(discriminante)))
+        r = x2 - (2*c) / (b + (sign(b))*(sqrt(discriminante)));
         err = (abs(r - x2)) / (abs(r));
         errl(iter) = err;
         iterl(iter) = iter;
@@ -72,7 +72,7 @@ endfunction
 %Valores iniciales
 x0 = 2;
 x1 = 2.2;
-x2 = 1.8'
+x2 = 1.8;
 %Iteraciones maximas
 MAXIT = 100;
 %Tolerancia
