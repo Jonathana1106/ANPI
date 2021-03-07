@@ -1,14 +1,14 @@
 # Metodo de Muller
 # Entradas:
-            # func: es la funcion a analizar
-            # x0: primer valor inicial
-            # x1: segundo valor inicial
-            # x2: tercer valor inicial
-            # MAXIT: es la cantidad de iteraciones máximas a realizar
-            # TOL: es la tolerancia del algoritmo
+            #func: es la funcion a analizar
+            #x0: primer valor inicial
+            #x1: segundo valor inicial
+            #x2: tercer valor inicial
+            #MAXIT: es la cantidad de iteraciones máximas a realizar
+            #TOL: es la tolerancia del algoritmo
 # Salidas:
-            # r: es la solucion, valor aproximado de x
-            # error: pocentaje de error del resultado obtenido
+            #r: es la solucion, valor aproximado de x
+            #error: pocentaje de error del resultado obtenido
 
 ########################################################################################
 import math
@@ -18,8 +18,8 @@ import matplotlib.pyplot as plt
 def muller(func, x0, x1, x2, MAXIT, TOL):
     itera = 1
     err = 1
-    iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
-    errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
+    iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
+    errl = []  #Lista que almacena el % de error de cada iteracion para despues graficar
 
     while(itera < MAXIT):
 
@@ -77,16 +77,18 @@ def grafica(listaValoresX, listaValoresY):
     plt.show()
 
 if __name__ == '__main__':
-    # Valores iniciales
+    #Valores iniciales
     x0 = 2
     x1 = 2.2
     x2 = 1.8
-    # Tolerancia
+    #Tolerancia
     TOL = 0.0000001
-    # Maximo iteraciones
+    #Maximo iteraciones
     MAXIT = 100
-    # Funcion
+    #Funcion
     func = lambda x: math.sin(x) - x/2
-    # Llamado de la funcion
+    #Llamado de la funcion
     r, err = muller(func, x0, x1, x2, MAXIT, TOL)
+    print("######################################################")
+    print("Metodo de Muller \n")
     print('xAprox = {}\nIteraciones = {}'.format(r, err))

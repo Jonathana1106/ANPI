@@ -81,4 +81,6 @@ TOL = 0.0000001;
 func = @(x) sin(x) - x/2;
 %Llamado de la funcion
 [r, err] = muller(func, x0, x1, x2, MAXIT, TOL);
+printf("############################################ \n");
+printf("Metodo de Muller \n");
 printf('r = %f\n%%Error = %i \n', r, err);

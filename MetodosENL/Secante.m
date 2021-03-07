@@ -59,4 +59,6 @@ TOL = 0.01;
 func = @(x) e^-(x^2) - x;
 %Llamado de la funcion
 [xAprox, err] = secante(func, x0, x1, MAXIT, TOL);
+printf("############################################ \n");
+printf("Metodo de la Secante \n");
 printf('xAprox = %f\n%%Error = %i \n', xAprox, err);

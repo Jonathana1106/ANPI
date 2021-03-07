@@ -1,13 +1,13 @@
 # Metodo de la Falsa Posicion
 # Entradas:
-            # func: es la funcion a analizar
-            # x0: primer valor inicial
-            # x1: segundo valor inicial
-            # MAXIT: es la cantidad de iteraciones máximas a realizar
-            # TOL: es la tolerancia del algoritmo
+            #func: es la funcion a analizar
+            #x0: primer valor inicial
+            #x1: segundo valor inicial
+            #MAXIT: es la cantidad de iteraciones máximas a realizar
+            #TOL: es la tolerancia del algoritmo
 # Salidas:
-            # xAprox: es la solucion, valor aproximado de x
-            # error: pocentaje de error del resultado obtenido
+            #xAprox: es la solucion, valor aproximado de x
+            #error: pocentaje de error del resultado obtenido
 
 ########################################################################################
 import math
@@ -21,8 +21,8 @@ def falsaPosicion(func, x0, x1, MAXIT, TOL):
     if (func(a) * func(b) < 0):
         itera = 0
         err = 1
-        iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
-        errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
+        iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
+        errl = []  #Lista que almacena el % de error de cada iteracion para despues graficar
         xAprox = 0
 
         x2 = x1 - ((x1 - x0) / (func(x1) - func(x0))) * func(x1)
@@ -83,15 +83,17 @@ def grafica(listaValoresX, listaValoresY):
     plt.show()
 
 if __name__ == '__main__':
-    # Intervalos
+    #Intervalos
     x0 = 1 / 2
     x1 = (math.pi) / 4
-    # Tolerancia
+    #Tolerancia
     TOL = 0.00001
-    # Maximo iteraciones
+    #Maximo iteraciones
     MAXIT = 100
-    # Funcion
+    #Funcion
     func = lambda x: math.cos(x) - x
-    # Llamado de la funcion
+    #Llamado de la funcion
     xAprox, err = falsaPosicion(func, x0, x1, MAXIT, TOL)
+    print("######################################################")
+    print("Metodo de la Falsa Posicion \n")
     print('xAprox = {}\n%Error = {}'.format(xAprox, err))

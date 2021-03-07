@@ -90,4 +90,6 @@ MAXIT = 100;
 TOL = 0.00001;
 func = @(x) cos(x) - x;
 [xAprox, err] = falsaPosicion(func, x0, x1, MAXIT, TOL);
+printf("############################################ \n");
+printf("Metodo de la Falsa Posicion \n");
 printf('xAprox = %f\n%%Error = %i \n', xAprox, err);

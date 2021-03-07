@@ -19,8 +19,8 @@ def biseccion(func, a, b, MAXIT, TOL):
     if(func(a) * func(b) < 0):
         itera = 1
         err = 1
-        iterl = [] # Lista que almacena el numero de iteraciones para despues graficar
-        errl = [] # Lista que almacena el % de error de cada iteracion para despues graficar
+        iterl = [] #Lista que almacena el numero de iteraciones para despues graficar
+        errl = [] #Lista que almacena el % de error de cada iteracion para despues graficar
 
         while(itera < MAXIT):
             xAprox = (a + b) / 2
@@ -69,5 +69,6 @@ if __name__ == '__main__':
     func = lambda x: math.e**x - x - 2
     #Llamado de la funcion
     xAprox, err = biseccion(func, a, b, MAXIT, TOL)
-    #print(xAprox)
+    print("######################################################")
+    print("Metodo de la Biseccion\n")
     print('xAprox = {}\n%Error = {}'.format(xAprox, err))

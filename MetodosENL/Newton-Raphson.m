@@ -60,4 +60,6 @@ TOL = 0.0001;
 func = @(x) e^x - 1/x;
 %Llamado de la funcion
 [xAprox, err] =  newtonRaphson(func, x0, MAXIT, TOL);
+printf("############################################ \n");
+printf("Metodo de Newton-Raphson \n");
 printf('xAprox = %f\n%%Error = %i \n', xAprox, err);

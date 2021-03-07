@@ -36,12 +36,13 @@ function [xAprox, err] = biseccion(f, a, b, MAXIT, TOL)
 
             iterl(iter) = iter;
             errl(iter) = err;
-            iter = iter + 1;
             err = (b - a) / (2)^(iter-1);
             
             if(err < TOL)
-              grafica(iterl, errl);
-              return;
+                grafica(iterl, errl);
+                return;
+            else
+                iter = iter + 1;
             endif
       endwhile
       grafica(iterl, errl);
@@ -69,4 +70,6 @@ TOL = 0.0001;
 funct = @(x) e^x - x - 2;
 %Llamado de la funcion
 [xAprox, err] =  biseccion(funct, a, b, MAXIT, TOL);
+printf("############################################ \n");
+printf("Metodo de la Biseccion \n");
 printf('xAprox = %f\n%%Error = %d \n', xAprox, err);
