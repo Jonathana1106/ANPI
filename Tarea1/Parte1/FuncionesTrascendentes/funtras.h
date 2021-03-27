@@ -66,7 +66,7 @@ double varM1(double a) {
         cout << "El numero 'a' debe ser mayor que cero. \n";
     }
 
-    return xk1;
+    return xk0;
 }
 
 double exp_t(double a) {
@@ -78,8 +78,8 @@ double exp_t(double a) {
         condParada = abs(Sk1 - Sk0);
         Sk0 = Sk1;
         n++;
-    } while(condParada > TOL && n < MAXITER);
-    return Sk1;
+    } while (condParada > TOL && n < MAXITER);
+    return Sk0;
 }
 
 /**
@@ -98,7 +98,7 @@ double sin_t(double a) {
         n++;
     } while (condParada > TOL && n < MAXITER);
 
-    return Sk1;
+    return Sk0;
 }
 
 /**
@@ -117,7 +117,7 @@ double cos_t(double a) {
         n++;
     } while (condParada > TOL && n < MAXITER);
 
-    return Sk1;
+    return Sk0;
 }
 
 /**
@@ -158,7 +158,7 @@ double ln_t(double a) {
     } else {
         cout << "El logaritmo natural de un numero menor que cero no se puede determinar.";
     }
-    return Sk1;
+    return Sk0;
 }
 
 /**
@@ -189,6 +189,126 @@ double log_t(double x, double a) {
  */
 double power_t(double x, double a) {
     return exp_t(x * ln_t(a));
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double sinh_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + ((pow(a, 2 * n + 1)) / (factorial(2 * n + 1)));
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while (condParada > TOL & n < MAXITER);
+    return Sk0;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double cosh_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + ((pow(a, 2 * n)) / (factorial(2 * n)));
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while (condParada > TOL & n < MAXITER);
+    return Sk0;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double tanh_t(double a) {
+    return sinh_t(a) / cosh_t(a);
+}
+
+double sqrt_t(double a) {
+    double condParada, x0 = 1, xk;
+
+    if (a < 0) {
+        cout << "No es posible calcular la raiz cuadrada de un numero negativo.";
+    } else if (a == 0) {
+        xk = 0;
+    } else {
+        do {
+            xk = x0 - (pow(x0, 2) - a) / (2 * x0);
+            condParada = abs((xk - x0) / xk);
+            x0 = xk;
+        } while (condParada > TOL);
+    }
+    return xk;
+}
+
+/**
+ *
+ * @param x
+ * @param a
+ * @return
+ */
+double root_t(double x, double a) {
+    double condParada, x0, xk;
+    x0 = a / 2;
+
+    if (x == 0) {
+        return 0;
+    } else {
+        do {
+            xk = x0 - (pow(x0, a) - x) / (a * (pow(x0, a - 1)));
+            condParada = abs((xk - x0) / xk);
+            x0 = xk;
+        } while (condParada > TOL);
+    }
+    return xk;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double asin_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + (factorial(2 * n) / ((pow(4, n) * pow(factorial(n), 2) * (2 * n + 1)))) * pow(a, 2 * n + 1);
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while (condParada > TOL && n < MAXITER);
+    return Sk1;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double atan_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + pow(-1, n) * (pow(a, 2 * n + 1) / (2 * n + 1));
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while (condParada > TOL & n < MAXITER);
+    return Sk1;
 }
 
 #endif //FUNCIONESTRASCENDENTES_FUNTRAS_H
