@@ -1,0 +1,194 @@
+#ifndef FUNCIONESTRASCENDENTES_FUNTRAS_H
+#define FUNCIONESTRASCENDENTES_FUNTRAS_H
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+const double TOL = 0.00000001;
+const double MAXITER = 2500;
+
+/**
+ * Metodo que se encarga de calcular el calculo de la operacion
+ * factorial de un numero
+ * @param num: numero al que se le desea encontrar su factorial
+ * @return numfact: factorial del numero ingresado
+ */
+double factorial(int num) {
+    double numfact = 1;
+    if (num < 0) {
+        cout << "El factorial solo se puede calcular para numeros mayores o iguales a cero. \n";
+    } else {
+        for (int i = 1; i <= num; i++) {
+            numfact = numfact * i;
+        }
+    }
+    return numfact;
+}
+
+/**
+ * Metodo que se encarga de obtener
+ * @param a
+ * @return
+ */
+double varM1(double a) {
+    double xk0, xk1, eps = 2.2204E-16, facta, fact0, fact20, fact40, fact60, fact80, fact100, condParada;
+    int i = 0;
+
+    if (a > 0) {
+        facta = factorial(a);
+        fact0 = factorial(0);
+        fact20 = factorial(20);
+        fact40 = factorial(40);
+        fact60 = factorial(60);
+        fact80 = factorial(80);
+        fact100 = factorial(100);
+
+        if (facta > fact0 && facta <= fact20) {
+            xk0 = pow(eps, 2);
+        } else if (facta > fact20 && facta <= fact40) {
+            xk0 = pow(eps, 4);
+        } else if (facta > fact40 && facta <= fact60) {
+            xk0 = pow(eps, 8);
+        } else if (facta > fact60 && facta <= fact80) {
+            xk0 = pow(eps, 11);
+        } else if (facta > fact80 && facta <= fact100) {
+            xk0 = pow(eps, 15);
+        }
+
+        do {
+            xk1 = xk0 * (2 - a * xk0);
+            condParada = abs((xk1 - xk0) / (xk1));
+            xk0 = xk1;
+            i++;
+        } while (i <= MAXITER && condParada >= TOL);
+    } else {
+        cout << "El numero 'a' debe ser mayor que cero. \n";
+    }
+
+    return xk1;
+}
+
+double exp_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + ((pow(a, n)) / (factorial(n)));
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while(condParada > TOL && n < MAXITER);
+    return Sk1;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double sin_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + pow(-1, n) * pow(a, (2 * n + 1)) / factorial((2 * n + 1));
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while (condParada > TOL && n < MAXITER);
+
+    return Sk1;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double cos_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    do {
+        Sk1 = Sk1 + pow(-1, n) * pow(a, (2 * n)) / factorial((2 * n));
+        condParada = abs(Sk1 - Sk0);
+        Sk0 = Sk1;
+        n++;
+    } while (condParada > TOL && n < MAXITER);
+
+    return Sk1;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double tan_t(double a) {
+    double seno, coseno, cosM1, resultado;
+    seno = sin_t(a);
+    coseno = cos_t(a);
+    if (coseno < 0) {
+        cout << "El resultado del coseno es negativo por lo tanto no se puede calcular la tangente mediante a^-1.\n";
+    } else {
+        cout << " ";
+        cosM1 = varM1(coseno);
+        resultado = seno * cosM1;
+    }
+    return resultado;
+}
+
+/**
+ *
+ * @param a
+ * @return
+ */
+double ln_t(double a) {
+    int n = 0;
+    double condParada, Sk1 = 0, Sk0 = 0;
+
+    if (a > 0) {
+        do {
+            Sk1 = Sk1 + (2 * (a - 1) / (a + 1)) * ((pow((2 * n + 1), -1)) * (pow((a - 1) / (a + 1), 2 * n)));
+            condParada = abs(Sk1 - Sk0);
+            Sk0 = Sk1;
+            n++;
+        } while (condParada > TOL && n < MAXITER);
+    } else {
+        cout << "El logaritmo natural de un numero menor que cero no se puede determinar.";
+    }
+    return Sk1;
+}
+
+/**
+ *
+ * @param x
+ * @param a
+ * @return
+ */
+double log_t(double x, double a) {
+    double lna, lnx, lnaM1, resultado;
+    if (x > 0 && a > 0) {
+        lna = ln_t(a);
+        lnx = ln_t(x);
+        cout << " ";
+        lnaM1 = varM1(lna);
+        resultado = lnx * lnaM1;
+    } else {
+        cout << "La base y el exponente deben ser numeros positivos. \n";
+    }
+    return resultado;
+}
+
+/**
+ *
+ * @param x
+ * @param a
+ * @return
+ */
+double power_t(double x, double a) {
+    return exp_t(x * ln_t(a));
+}
+
+#endif //FUNCIONESTRASCENDENTES_FUNTRAS_H
