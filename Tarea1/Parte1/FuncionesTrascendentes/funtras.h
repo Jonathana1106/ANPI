@@ -27,9 +27,9 @@ double factorial(int num) {
 }
 
 /**
- * Metodo que se encarga de obtener
- * @param a
- * @return
+ * Metodo que se encarga de obtener el valor de x^-1.
+ * @param a: numero a elevar.
+ * @return xk0: resultado de la operacion.
  */
 double varM1(double a) {
     double xk0, xk1, eps = 2.2204E-16, facta, fact0, fact20, fact40, fact60, fact80, fact100, condParada;
@@ -65,10 +65,14 @@ double varM1(double a) {
     } else {
         cout << "El numero 'a' debe ser mayor que cero. \n";
     }
-
     return xk0;
 }
 
+/**
+ * Metodo que se encarga de realizar la operacion e^a.
+ * @param a: exponente al cual se desea elevar e.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
+ */
 double exp_t(double a) {
     int n = 0;
     double condParada, Sk1 = 0, Sk0 = 0;
@@ -83,9 +87,9 @@ double exp_t(double a) {
 }
 
 /**
- *
- * @param a
- * @return
+ * Metodo que se encarga de calcular el seno de un numero a.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double sin_t(double a) {
     int n = 0;
@@ -97,14 +101,13 @@ double sin_t(double a) {
         Sk0 = Sk1;
         n++;
     } while (condParada > TOL && n < MAXITER);
-
     return Sk0;
 }
 
 /**
- *
- * @param a
- * @return
+ * Metodo que se encarga de calcular el coseno de un numero a.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double cos_t(double a) {
     int n = 0;
@@ -116,14 +119,13 @@ double cos_t(double a) {
         Sk0 = Sk1;
         n++;
     } while (condParada > TOL && n < MAXITER);
-
     return Sk0;
 }
 
 /**
- *
- * @param a
- * @return
+ * Metodo que se encarga de calcular el tangente de un numero a.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double tan_t(double a) {
     double seno, coseno, cosM1, resultado;
@@ -140,9 +142,9 @@ double tan_t(double a) {
 }
 
 /**
- *
- * @param a
- * @return
+ * Metodo que se encarga de calcular el logaritmo natural de un numero.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double ln_t(double a) {
     int n = 0;
@@ -162,10 +164,10 @@ double ln_t(double a) {
 }
 
 /**
- *
- * @param x
- * @param a
- * @return
+ * Metodo que se encarga de calcular el logaritmo natural de un numero.
+ * @param x: exponente del logaritmo.
+ * @param a: base del logaritmo.
+ * @return resultado: solucion de obtener loga(x) a partir de logaritmos naturales.
  */
 double log_t(double x, double a) {
     double lna, lnx, lnaM1, resultado;
@@ -182,19 +184,19 @@ double log_t(double x, double a) {
 }
 
 /**
- *
- * @param x
- * @param a
- * @return
+ * Metodo que se encarga de elevar un numero 'a' a un exponente 'x'.
+ * @param x: exponente.
+ * @param a: numero a elevar.
+ * @return: resultado de la evauacion
  */
 double power_t(double x, double a) {
     return exp_t(x * ln_t(a));
 }
 
 /**
- *
- * @param a
- * @return
+* Metodo que se encarga de calcular el seno hiperbolico de un numero a.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double sinh_t(double a) {
     int n = 0;
@@ -210,9 +212,9 @@ double sinh_t(double a) {
 }
 
 /**
- *
- * @param a
- * @return
+ * Metodo que se encarga de calcular el coseno hiperbolico de un numero a.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double cosh_t(double a) {
     int n = 0;
@@ -228,14 +230,19 @@ double cosh_t(double a) {
 }
 
 /**
- *
- * @param a
- * @return
+ * Metodo que se encarga de calcular el tangente hiperbolico de un numero a.
+ * @param a: numero a evaluar.
+ * @return Sk0: resultado de realizar la operacion mediante sumatoria.
  */
 double tanh_t(double a) {
     return sinh_t(a) / cosh_t(a);
 }
 
+/**
+ * Metodo que se encarga de calcular la raiz cuadradda de un numero a.
+ * @param a: numero a determinar la raiz cuadrada.
+ * @return xk: valor aproximado de la raiz utilizando el metodo de Newton-Raphson.
+ */
 double sqrt_t(double a) {
     double condParada, x0 = 1, xk;
 
@@ -254,10 +261,10 @@ double sqrt_t(double a) {
 }
 
 /**
- *
- * @param x
- * @param a
- * @return
+ * Metodo que se encarga de calcular la raiz 'a' de un numero 'x'.
+ * @param x: numero a determinar la raiz.
+ * @param a: exponente de la raiz.
+ * @return xk: valor aproximado de la raiz utilizando el metodo de Newton-Raphson.
  */
 double root_t(double x, double a) {
     double condParada, x0, xk;
