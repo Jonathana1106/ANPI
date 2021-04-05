@@ -19,7 +19,7 @@ from numpy import linalg, array
 ###############################################################################
 
 def gradienteConjugadoNoLineal(func, variables, xk, MAXIT, TOL, reglaBK):
-    funcion = sympify(func)
+    funcion = sympify(func) #Convertir el string a una expresion matematica
     itera = 0
     iterl = []
     errl = []
@@ -33,7 +33,7 @@ def gradienteConjugadoNoLineal(func, variables, xk, MAXIT, TOL, reglaBK):
     listaSimb = []
     n = len(variables)
     for i in range(0, n):
-        listaSimb += [Symbol(variables[i])]
+        listaSimb += [Symbol(variables[i])] #Hacer que 'x' 'y' sea variables matematicas y no solo string
 
     gradiente = []
     for i in range(0, n):
@@ -64,6 +64,10 @@ def gradienteConjugadoNoLineal(func, variables, xk, MAXIT, TOL, reglaBK):
         betakdk = [i * bk for i in dk]
         mgk = [i * -1 for i in gkx]
 
+        '''
+        Para cada elemento en mgk y en betakdk realizar la suma de esos elementos
+        siempre y cuando no se salgan del rango maximo de elementos de cada uno
+        '''
         dk = [x1 + x2 for (x1, x2) in zip(mgk, betakdk)]
 
         xk = vecx.copy()
@@ -89,7 +93,7 @@ def evaluarGradiente(gradiente, variables, xk):
         for j in range(0, n):
             funcion = funcion.subs(variables[j], xk[j])
 
-        gradResult += [funcion.doit()]
+        gradResult += [funcion.doit()] #Decrile que evalue lo que no se ha evaluado
 
     return gradResult
 
