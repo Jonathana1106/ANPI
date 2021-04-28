@@ -1,34 +1,31 @@
 %{
     Metodo de Sustitucion Adelante
+    -Resuelve un sistema del tipo Ax = b
     Parametros de Entrada
-        @param f: funcion a la cual se le aplicara el algoritmo
-        @param a: limite inferior del intervalo
+        @param matrizA: matriz triangular inferior NxN
+        @param matrizB: matriz Nx1
     
     Parametros de Salida
-        @return xAprox: valor aproximado de x
+        @return X: solucion de la matriz
 %}
 
 clc;
 clear;
+pkg load symbolic;
+format long;
+warning('off', 'all');
 
-function matrizResultado = sustitucionF(matrizTI, matrizC)
-    [n, m] = size(matrizD);
-    listaSimb = [];
-
-    for i = 1 : n
-        listaSimb = [listaSimb; sym(strcat('x', num2str(i)))];
-    end
-
-    for i = 1 : n
-        subLista = matrizTI(i,:);
-        ecuacion = strcat('-', num2str(matrizC(i)));
-
-        for x = 1 : m
-            ecuacion = strcat(ecuacion, ' + ', num2str(subLista(x)), ' * ', char(listaSimb(x)));
-        end
-        
-        resultado = solve(sym(ecuacion));
-        listaSimb(i) = resultado;
-    end
-    matrizResultado = listaSimb;
+function X = sustitucionAdelante(matrizA, matrizB)
+    n = length(matrizB);
+    X = zeros(n, 1);
+    X(1) = matrizB(1)/matrizA(1, 1);
+    
+    for(k = 2 : n)
+        div = matrizA(k, k);
+    if (div != 0)
+        X(k) = (matrizB(k) - matrizA(k, 1 : k-1)*X(1: k-1))/matrizA(k, k);
+    else
+        disp("Error: se ha producido una division por cero");
+    endif
+  endfor
 endfunction
