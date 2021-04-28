@@ -14,7 +14,7 @@ pkg load symbolic;
 format long;
 warning('off', 'all');
 
-function X = gaussianElimination(matrizD, matrizI)
+function X = eliminacionGaussiana(matrizD, matrizI)
   
   [n, m] = size(matrizD);
   if (n ~= m)
@@ -73,7 +73,7 @@ A = [2 -6 12 16 ; 1 -2 6 6; -1 3 -3 -7; 0 4 3 -6];
 %Matriz de terminos independientes
 B = [70 26 -30 -26]';
 %Llamado de la funcion
-X = gaussianElimination(A, B);
+X = eliminacionGaussiana(A, B);
 printf("############################################ \n");
 printf("Metodo de la Eliminacion Gaussiana \n");
 printf('X = %f\n', X);
