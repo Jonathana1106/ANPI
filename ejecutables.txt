@@ -1,0 +1,15 @@
+Python: 
+
+python3 Biseccion.py
+
+C++
+
+GiNac:
+
+g++ FalsaPosicion.cpp -o prog `pkg-config --cflags --libs ginac`
+./prog
+
+Armadillo:
+
+g++ Jacobi.cpp -o prog -DARMA_DONT_USE_WRAPPER -lopenblas -llapack
+./prog
