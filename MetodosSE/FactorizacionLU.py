@@ -5,11 +5,17 @@
     # Salidas:
         # X: solucion del sistema
 
-########################################################################################
+###############################################################################
 import numpy as np
-########################################################################################
+import scipy.linalg as la
+###############################################################################
 
-def factorizacionLU(matrizD, matrizI):
+def fact_lu(matrizD, matrizI):
+    if(np.linalg.det(matrizD) == 0):
+        print("La matriz no es singular")
+        return
+    else:
+        pass
     n = len(matrizD)
     L = np.eye(n)
     U = matrizD
@@ -44,7 +50,7 @@ if __name__ == '__main__':
     # Vector de terminos independientes
     B = [11, 70, 17]
     # Llamado de la funcion
-    X = factorizacionLU(A, B)
+    X = fact_lu(A, B)
     print("######################################################")
     print("Metodo de la Factorizacion LU\n")
     print('X = {}\n'.format(X))
