@@ -1,6 +1,15 @@
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import sympy
+import sympy as sym
+from sympy import symbols
+from sympy.plotting import plot
+
+from sympy import symbols
+from numpy import linspace
+from sympy import lambdify
+import matplotlib.pyplot as mpl
 
 def trazador_cubico(func, S):
     # Procedemos a evaluar los puntos 'x'
@@ -34,15 +43,9 @@ def trazador_cubico(func, S):
     for i in range(1, k):
         # Primer caso Ms[1] = 0
         if i == 1:
-            print("delta_hk[i] es:\n", delta_hk[i], "\n")
-            print("(k - 3) * [0] es:\n", (k - 3) * [0], "\n")
-            print("delta_hk[i] + [0] * (k - 3) es:\n", delta_hk[i] + [0] * (k - 3), "\n")
             A.append([2 * (delta_hk[i - 1] + delta_hk[i]), delta_hk[i]] + [0] * (k - 3))
         # Segundo caso Ms[n+1] = 0
         elif i == k - 1:
-            print("delta_hk[i] es:\n", delta_hk[i], "\n")
-            print("(k - 3) * [0] es:\n", (k - 3) * [0], "\n")
-            print("delta_hk[i] + [0] * (k - 3) es:\n", delta_hk[i] + [0] * (k - 3), "\n")
             A.append([0] * (k - 3) + [delta_hk[i - 1], 2 * (delta_hk[i - 1] + delta_hk[i])])
         else:
             A.append([0] * (i - 2) + [delta_hk[i - 1], 2 * (delta_hk[i - 1] + delta_hk[i]), delta_hk[i]] + [0] * (k - 2 - i))
@@ -81,17 +84,61 @@ def trazador_cubico(func, S):
     d = np.array(d)
 
     Sx = []
-    iteraciones = []
+    Sxi = []
+    x, x0 = symbols('x x0')
     for i in range(len(a)):
-        iteraciones.append(i)
         Sx.append(a[i]*(math.pow(S[i+1] - S[i], 3)) + b[i]*(math.pow(S[i+1] - S[i], 2)) + c[i]*(S[i+1] - S[i]) + d[i])
+        Sxi.append(a[i]*((x-x0)**3) + b[i]*((x-x0)**2) + c[i]*(x-x0) + d[i])
 
-    print("Sx es:\n", Sx, "\n")
-    plt.title("Trazadores Cubicos")
-    plt.xlabel("Iteraciones")
-    plt.ylabel("Sx(i)")
-    plt.stem(iteraciones, Sx)
+    # Polinomio trazador
+    x = sympy.Symbol('x')
+    px_tabla = []
+    for i in range(0, len(S)-1, 1):
+        pxtramo = a[i] * (x - S[i]) ** 3 + b[i] * (x - S[i]) ** 2
+        pxtramo = pxtramo + c[i] * (x - S[i]) + d[i]
+        pxtramo = pxtramo.expand()
+        px_tabla.append(pxtramo)
+
+    # Polinomios por tramos
+    print('Polinomios por tramos: ')
+    for tramo in range(1, len(S)-1, 1):
+        print(' x = [' + str(S[tramo - 1]) + ',' + str(S[tramo]) + ']')
+        print(str(px_tabla[tramo - 1]))
+
+    print("Sx0 es:\n", Sxi[0], "\n")
+    print("Sx1 es:\n", Sxi[1], "\n")
+    print("Sx2 es:\n", Sxi[2], "\n")
+    print("Sx3 es:\n", Sxi[3], "\n")
+    print("Sx4 es:\n", Sxi[4], "\n")
+
+    xtraza = np.array([])
+    ytraza = np.array([])
+    tramo = 1
+
+    while not (tramo >= len(S)):
+        x0 = S[tramo - 1]
+        x1 = S[tramo]
+        xtramo = np.linspace(x0, x1, 100)
+
+        # Evalua polinomio del tramo
+        pxtramo = px_tabla[tramo - 1]
+        pxt = sym.lambdify('x', pxtramo)
+        ytramo = pxt(xtramo)
+
+        # Vectores de trazador en x,y
+        xtraza = np.concatenate((xtraza, xtramo))
+        ytraza = np.concatenate((ytraza, ytramo))
+        tramo = tramo + 1
+
+    # Gráfica
+    plt.plot(S, valoresY, 'ro', label='puntos')
+    plt.plot(xtraza, ytraza, label='trazador', color='blue')
+    plt.title('Trazadores Cúbicos Naturales')
+    plt.xlabel('xi')
+    plt.ylabel('S(xi)')
+    plt.legend()
     plt.show()
+
     return a, b, c, d, Sx
 
 def jacobi(A, b, x0, tol):
@@ -197,13 +244,13 @@ if __name__ == '__main__':
     # Intervalo
     intervalo = [1, 6]
     # Conjunto soporte
-    # S = [1, 2, 3, 4, 5, 6]
-    S = [1, 1.05, 1.07, 1.1]
+    S = [1, 2, 3, 4, 5, 6]
+    # S = [1, 1.05, 1.07, 1.1]
     # Funcion
-    # func = lambda x: x * (math.cos(x)) + math.pow(x, 2) - (1 / x)
-    func = lambda x: 3*x*(math.pow(math.e, x)) - 2*(math.pow(math.e, x))
+    func = lambda x: x * (math.cos(x)) + math.pow(x, 2) - (1 / x)
+    # func = lambda x: 3*x*(math.pow(math.e, x)) - 2*(math.pow(math.e, x))
     # Llamado de la funcion
     a, b, c, d, Sx = trazador_cubico(func, S)
     print("######################################################")
     print("Metodo del Trazador Cubico \n")
-    print('a = {}\nb = {}\nc = {}\nd = {}\nSx(i) = {}'.format(a, b, c, d, Sx))
+    print('a = {}\nb = {}\nc = {}\nd = {}\nSx = {}'.format(a, b, c, d, Sx))
