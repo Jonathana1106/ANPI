@@ -1,24 +1,23 @@
-# Metodo de Newton-Raphson
-# Entradas:
-            #func: es la funcion a analizar
-            #x0: valor inicial
-            #MAXIT: es la cantidad de iteraciones maximas a realizar
-            #TOL: es la tolerancia del algoritmo
-# Salidas:
-            #xAprox: es la solucion, valor aproximado de x
-            #error: pocentaje de error del resultado obtenido
-
-########################################################################################
+###############################################################################
 import math
 import matplotlib.pyplot as plt
 from scipy.misc import derivative
-########################################################################################
+###############################################################################
 
-def newtonRaphson(func, x0, MAXIT, TOL):
+def newton_raphson(func, x0, MAXIT, TOL):
+    '''
+    Metodo de Newton-Raphson
+    :param func: es la funcion a analizar
+    :param x0: valor inicial
+    :param MAXIT: es la cantidad de iteraciones maximas a realizar
+    :param TOL: es la tolerancia del algoritmo
+    :return: xAprox: es la solucion, valor aproximado de x
+    :return: error: pocentaje de error del resultado obtenido
+    '''
     itera = 1
     err = 1
-    iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
-    errl = []  #Lista que almacena el % de error de cada iteracion para despues graficar
+    iterl = []  #Lista que almacena el numero de iteraciones
+    errl = []  #Lista que almacena el % de error de cada iteracion
     xAprox = x0
 
     while (itera < MAXIT):
@@ -38,13 +37,13 @@ def newtonRaphson(func, x0, MAXIT, TOL):
     grafica(iterl, errl)
     return xAprox, err
 
-#Grafica
-#Entradas:
-            #listaValoresX: valores que se graficaran en el eje 'x'
-            #listaValoresY: valores que se graficaran en el eje 'y'
-#Salidas:
-            #Grafico con lo valores ingresados
 def grafica(listaValoresX, listaValoresY):
+    '''
+    Grafica
+    :param listaValoresX: valores que se graficaran en el eje 'x'
+    :param listaValoresY: valores que se graficaran en el eje 'y'
+    :return: Grafico con lo valores ingresados
+    '''
     plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de Newton-Raphson")
     plt.xlabel("Iteraciones")
@@ -61,7 +60,7 @@ if __name__ == '__main__':
     #Funcion
     func = lambda x: (math.e)**x - 1/x
     #Llamado de la funcion
-    xAprox, err = newtonRaphson(func, x0, MAXIT, TOL)
+    xAprox, err = newton_raphson(func, x0, MAXIT, TOL)
     print("######################################################")
     print("Metodo de Newton-Raphson \n")
-    print('xAprox = {}\n%Error = {}'.format(xAprox, err))
+    print('xAprox = {}\n%Error = {}'.format(xAprox, err)) 
