@@ -1,3 +1,9 @@
+Windows
+
+Python: 
+python Biseccion.py
+
+Ubuntu
 Python: 
 
 python3 Biseccion.py
