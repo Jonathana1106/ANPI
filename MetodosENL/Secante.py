@@ -1,20 +1,19 @@
-# Metodo de la Secante
-# Entradas:
-            #func: es la funcion a analizar
-            #x0: valor inicial
-            #x1: valor inicial
-            #MAXIT: es la cantidad de iteraciones máximas a realizar
-            #TOL: es la tolerancia del algoritmo
-# Salidas:
-            #xAprox: es la solucion, valor aproximado de x
-            #error: pocentaje de error del resultado obtenido
-
 ########################################################################################
 import math
 import matplotlib.pyplot as plt
 ########################################################################################
 
 def secante(func, x0, x1, MAXIT, TOL):
+    '''
+    Metodo de la Secante
+    :param func: es la funcion a analizar
+    :param x0: valor inicial
+    :param x1: valor inicial
+    :param MAXIT: es la cantidad de iteraciones máximas a realizar
+    :param TOL: es la tolerancia del algoritmo
+    :return: xAprox: es la solucion, valor aproximado de x
+    :return: error: pocentaje de error del resultado obtenido
+    '''
     itera = 2
     err = 1
     iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
@@ -22,12 +21,10 @@ def secante(func, x0, x1, MAXIT, TOL):
     xAprox = x0
 
     while(itera < MAXIT):
-
         xAprox = x1 - ((x1 - x0)/(func(x1) - func(x0)))  * func(x1)
         err = abs(xAprox - x1)/abs(xAprox)
         iterl.append(itera)
         errl.append(err)
-
         if(err < TOL):
             grafica(iterl, errl)
             return xAprox, err
@@ -35,17 +32,16 @@ def secante(func, x0, x1, MAXIT, TOL):
             itera = itera + 1
             x0 = x1
             x1 = xAprox
-
     grafica(iterl, errl)
     return xAprox, err
 
-#Grafica
-#Entradas:
-            #listaValoresX: valores que se graficaran en el eje 'x'
-            #listaValoresY: valores que se graficaran en el eje 'y'
-#Salidas:
-            #Grafico con lo valores ingresados
 def grafica(listaValoresX, listaValoresY):
+    '''
+    Grafica
+    :param listaValoresX: valores que se graficaran en el eje 'x'
+    :param listaValoresY: valores que se graficaran en el eje 'y'
+    :return: Grafico con los valores ingresados
+    '''
     plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de la Secante")
     plt.xlabel("Iteraciones")
