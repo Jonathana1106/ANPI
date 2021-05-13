@@ -1,21 +1,19 @@
-#Metodo de la Biseccion
-#Entradas:
-            #func: es la funcion a analizar
-            #a: es "a" valor inferior en el intervalo de la funcion en el rango [a, b]
-            #b: es "b" valor superior en el intervalo de la funcion en el rango [a, b]
-            #MAXIT: es la cantidad de iteraciones máximas a realizar
-            #TOL: es la tolerancia del algoritmo
-#Salidas:
-            #xAprox: es la solucion, valor aproximado de x
-            #error: pocentaje de error del resultado obtenido
-
 ########################################################################################
 import math
 import matplotlib.pyplot as plt
 ########################################################################################
 
 def biseccion(func, a, b, MAXIT, TOL):
-
+    '''
+    Metodo de la Biseccion
+    :param func: es la funcion a analizar
+    :param a: es "a" valor inferior en el intervalo de la funcion en el rango [a, b]
+    :param b: es "b" valor superior en el intervalo de la funcion en el rango [a, b]
+    :param MAXIT: es la cantidad de iteraciones máximas a realizar
+    :param TOL: es la tolerancia del algoritmo
+    :return: xAprox: es la solucion, valor aproximado de x
+    :return: error: pocentaje de error del resultado obtenido
+    '''
     if(func(a) * func(b) < 0):
         itera = 1
         err = 1
@@ -44,13 +42,13 @@ def biseccion(func, a, b, MAXIT, TOL):
     else:
         raise ValueError("Las condiciones  no garantizan el cero de la funcion.")
 
-#Grafica
-#Entradas:
-            #listaValoresX: valores que se graficaran en el eje 'x'
-            #listaValoresY: valores que se graficaran en el eje 'y'
-#Salidas:
-            #Grafico con lo valores ingresados
 def grafica(listaValoresX, listaValoresY):
+    '''
+    Grafica
+    :param listaValoresX: valores que se graficaran en el eje 'x'
+    :param listaValoresY: valores que se graficaran en el eje 'y'
+    :return: Grafico con los valores ingresados
+    '''
     plt.plot(listaValoresX, listaValoresY, 'bx')
     plt.title("Metodo de la Biseccion")
     plt.xlabel("Iteraciones")

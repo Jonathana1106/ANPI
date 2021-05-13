@@ -3,10 +3,25 @@
 
 using namespace std;
 
+/**
+ * @brief 
+ * 
+ * @param x 
+ * @return double 
+ */
 double F(double x) {
     return exp(x) - x - 2;
 }
 
+/**
+ * @brief 
+ * 
+ * @param a 
+ * @param b 
+ * @param MAXIT 
+ * @param TOL 
+ * @return double 
+ */
 double Biseccion(double a, double b, int MAXIT, double TOL) {
     int cont = 1;
     double x;
