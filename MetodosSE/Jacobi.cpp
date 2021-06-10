@@ -12,24 +12,31 @@ using namespace arma;
  * @param TOL: tolerancia de la respuesta
  * @return tuple<vec, double>: vector solucion, error de la solucion 
  */
-tuple<vec, double> jacobi(mat matrizD, vec vectorTI, vec xInicial, int MAXIT, double TOL) {
+tuple<vec, double> jacobi(mat matrizD, vec vectorTI, vec xInicial, int MAXIT, double TOL)
+{
 
-    mat D (size(matrizD), fill::zeros);
-    mat U (size(matrizD), fill::zeros);
-    mat L (size(matrizD), fill::zeros);
+    mat D(size(matrizD), fill::zeros);
+    mat U(size(matrizD), fill::zeros);
+    mat L(size(matrizD), fill::zeros);
 
-    for(int i = 0; i < matrizD.n_rows; i++) {
-        for(int j = 0; j < matrizD.n_cols; j++) {
-            if(j < i) {
+    for (int i = 0; i < matrizD.n_rows; i++)
+    {
+        for (int j = 0; j < matrizD.n_cols; j++)
+        {
+            if (j < i)
+            {
                 L(i, j) = matrizD(i, j);
             }
-            else if(j > i) {
+            else if (j > i)
+            {
                 U(i, j) = matrizD(i, j);
             }
-            else if(i == j) {
+            else if (i == j)
+            {
                 D(i, j) = matrizD(i, j);
             }
-            else {
+            else
+            {
                 cout << "Error" << endl;
             }
         }
@@ -40,15 +47,18 @@ tuple<vec, double> jacobi(mat matrizD, vec vectorTI, vec xInicial, int MAXIT, do
     int iter = 0;
     double err = TOL + 1;
 
-    while(iter < MAXIT) {
-        xk1 = ((-D.i())*(L + U)*(xk)) + ((D.i())*(vectorTI));
+    while (iter < MAXIT)
+    {
+        xk1 = ((-D.i()) * (L + U) * (xk)) + ((D.i()) * (vectorTI));
         xk = xk1;
-        err = norm(matrizD*xk-vectorTI);
+        err = norm(matrizD * xk - vectorTI);
 
-        if(err < TOL) {
+        if (err < TOL)
+        {
             break;
         }
-        else {
+        else
+        {
             iter = iter + 1;
         }
     }
@@ -58,9 +68,11 @@ tuple<vec, double> jacobi(mat matrizD, vec vectorTI, vec xInicial, int MAXIT, do
 /**
  * Ejemplo numerico
  */
-int main() {
+int main()
+{
     tuple<vec, double> testJ = jacobi("5 1 1; 1 5 1; 1 1 5", "7 7 7", "0 0 0", 100, 0.000001);
-    cout << "Aproximacion: \n" << get<0>(testJ) << endl;
+    cout << "Aproximacion: \n"
+         << get<0>(testJ) << endl;
     cout << "Error: " << get<1>(testJ) << endl;
     return 0;
 }
