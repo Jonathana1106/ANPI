@@ -8,6 +8,7 @@ from sympy import symbols
 from Jacobi import jacobi
 ###############################################################################
 
+
 def trazador_cubico(func, S):
     '''
     Metodo del Trazador Cubico
@@ -41,15 +42,18 @@ def trazador_cubico(func, S):
     for i in range(1, k):
         # Primer caso Ms[1] = 0
         if i == 1:
-            A.append([2 * (delta_hk[i - 1] + delta_hk[i]), delta_hk[i]] + [0] * (k - 3))
+            A.append([2 * (delta_hk[i - 1] + delta_hk[i]),
+                     delta_hk[i]] + [0] * (k - 3))
         # Segundo caso Ms[n+1] = 0
         elif i == k - 1:
-            A.append([0] * (k - 3) + [delta_hk[i - 1], 2 * (delta_hk[i - 1] + delta_hk[i])])
+            A.append([0] * (k - 3) + [delta_hk[i - 1],
+                     2 * (delta_hk[i - 1] + delta_hk[i])])
         else:
             A.append(
                 [0] * (i - 2) + [delta_hk[i - 1], 2 * (delta_hk[i - 1] + delta_hk[i]), delta_hk[i]] + [0] * (k - 2 - i))
         # Creando el vector u
-        u.append(6 * (delta_yk[i] / delta_hk[i] - delta_yk[i - 1] / delta_hk[i - 1]))
+        u.append(6 * (delta_yk[i] / delta_hk[i] -
+                 delta_yk[i - 1] / delta_hk[i - 1]))
     # Convirtiendolo a numpy array
     A = np.array([np.array(a) for a in A])
     u = np.array(u)
@@ -67,7 +71,8 @@ def trazador_cubico(func, S):
     for i in range(k):
         a.append((Ms[i + 1] - Ms[i]) / (6 * delta_hk[i]))
         b.append(Ms[i] / 2)
-        c.append((yk[i + 1] - yk[i]) / delta_hk[i] - (2 * delta_hk[i] * Ms[i] + delta_hk[i] * Ms[i + 1]) / 6)
+        c.append((yk[i + 1] - yk[i]) / delta_hk[i] -
+                 (2 * delta_hk[i] * Ms[i] + delta_hk[i] * Ms[i + 1]) / 6)
         d.append(yk[i])
 
     # Convirtiendo
@@ -82,7 +87,8 @@ def trazador_cubico(func, S):
     for i in range(len(a)):
         Sx.append(
             a[i] * (math.pow(S[i + 1] - S[i], 3)) + b[i] * (math.pow(S[i + 1] - S[i], 2)) + c[i] * (S[i + 1] - S[i]) + d[i])
-        Sxi.append(a[i] * ((x - x0) ** 3) + b[i] * ((x - x0) ** 2) + c[i] * (x - x0) + d[i])
+        Sxi.append(a[i] * ((x - x0) ** 3) + b[i] *
+                   ((x - x0) ** 2) + c[i] * (x - x0) + d[i])
 
     # Polinomio trazador
     x = sympy.Symbol('x')
@@ -118,8 +124,9 @@ def trazador_cubico(func, S):
         tramo = tramo + 1
 
     # Grafica
-    grafica(S, valoresY, xtraza, ytraza);
+    grafica(S, valoresY, xtraza, ytraza)
     return a, b, c, d, Sx
+
 
 def grafica(listaPuntosX, listaPuntosY, trazaX, trazaY):
     '''
@@ -138,6 +145,7 @@ def grafica(listaPuntosX, listaPuntosY, trazaX, trazaY):
     plt.legend()
     plt.show()
 
+
 if __name__ == '__main__':
     # Intervalo
     intervalo = [1, 6]
@@ -145,7 +153,7 @@ if __name__ == '__main__':
     S = [1, 2, 3, 4, 5, 6]
     # S = [1, 1.05, 1.07, 1.1]
     # Funcion
-    func = lambda x: x * (math.cos(x)) + math.pow(x, 2) - (1 / x)
+    def func(x): return x * (math.cos(x)) + math.pow(x, 2) - (1 / x)
     # func = lambda x: 3*x*(math.pow(math.e, x)) - 2*(math.pow(math.e, x))
     # Llamado de la funcion
     a, b, c, d, Sx = trazador_cubico(func, S)
