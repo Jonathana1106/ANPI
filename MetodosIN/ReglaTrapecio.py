@@ -3,6 +3,7 @@ from numpy import double
 from sympy import sympify, symbols, diff
 ###############################################################################
 
+
 def trapecio(funcion, a, b):
     '''
     Metodo de la Regla del Trapecio
@@ -24,17 +25,18 @@ def trapecio(funcion, a, b):
     error = ((b - a)**3/(12))*(vmax)
     return xAprox, error
 
+
 if __name__ == '__main__':
-    #Intervalo inferior
+    # Intervalo inferior
     a = 2
     # a = 1
-    #Intervalo superior
+    # Intervalo superior
     b = 5
     # b = 2
-    #Funcion
+    # Funcion
     funcion = "ln(x)"
     # funcion = "13/(5*x+4)"
-    #Llamado de la funcion
+    # Llamado de la funcion
     print("######################################################")
     print("Metodo de la Regla del Trapecio \n")
     xAprox, error = trapecio(funcion, a, b)

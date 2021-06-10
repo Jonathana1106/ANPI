@@ -64,7 +64,7 @@ tuple<double, double> trapecio_compuesto(string func, double a, double b, int N)
     //Se obtiene la segunda derivada de la funcion
     ex fd = f.diff(x, 2);
     vec xd(2, fill::zeros);
-    //Se obtiene el alfa maximo a utilizar en la cota de error 
+    //Se obtiene el alfa maximo a utilizar en la cota de error
     //mediante el maximo de la segunda derivada
     xd(0) = ex_to<numeric>(evalf(subs(fd, x == a))).to_double();
     xd(1) = ex_to<numeric>(evalf(subs(fd, x == b))).to_double();
