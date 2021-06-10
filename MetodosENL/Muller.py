@@ -3,6 +3,7 @@ import math
 import matplotlib.pyplot as plt
 ########################################################################################
 
+
 def muller(func, x0, x1, x2, MAXIT, TOL):
     '''
     Metodo de Muller
@@ -17,14 +18,16 @@ def muller(func, x0, x1, x2, MAXIT, TOL):
     '''
     itera = 1
     err = 1
-    iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
-    errl = []  #Lista que almacena el % de error de cada iteracion para despues graficar
+    iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
+    errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
     while(itera < MAXIT):
         divisor = ((x0 - x1) * (x0 - x2) * (x1 - x2))
         frac1a = (float(x1) - float(x2)) * (float(func(x0)) - float(func(x2)))
         frac2a = (float(x0) - float(x2)) * (float(func(x1)) - float(func(x2)))
-        frac1b = ((float(x0) - float(x2))**2) * (float(func(x1)) - float(func(x2)))
-        frac2b = ((float(x1) - float(x2))**2) * (float(func(x0)) - float(func(x2)))
+        frac1b = ((float(x0) - float(x2))**2) * \
+            (float(func(x1)) - float(func(x2)))
+        frac2b = ((float(x1) - float(x2))**2) * \
+            (float(func(x0)) - float(func(x2)))
         a = (frac1a - frac2a) / (divisor)
         b = (frac1b - frac2b) / (divisor)
         c = func(x2)
@@ -50,6 +53,7 @@ def muller(func, x0, x1, x2, MAXIT, TOL):
     grafica(iterl, errl)
     return r, err
 
+
 def grafica(listaValoresX, listaValoresY):
     '''
     Grafica
@@ -63,18 +67,19 @@ def grafica(listaValoresX, listaValoresY):
     plt.ylabel("% Error")
     plt.show()
 
+
 if __name__ == '__main__':
-    #Valores iniciales
+    # Valores iniciales
     x0 = 2
     x1 = 2.2
     x2 = 1.8
-    #Tolerancia
+    # Tolerancia
     TOL = 0.0000001
-    #Maximo iteraciones
+    # Maximo iteraciones
     MAXIT = 100
-    #Funcion
-    func = lambda x: math.sin(x) - x/2
-    #Llamado de la funcion
+    # Funcion
+    def func(x): return math.sin(x) - x/2
+    # Llamado de la funcion
     r, err = muller(func, x0, x1, x2, MAXIT, TOL)
     print("######################################################")
     print("Metodo de Muller \n")

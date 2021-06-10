@@ -3,6 +3,7 @@ import math
 import matplotlib.pyplot as plt
 ########################################################################################
 
+
 def falsaPosicion(func, x0, x1, MAXIT, TOL):
     '''
     Metodo de la Falsa Posicion
@@ -19,8 +20,8 @@ def falsaPosicion(func, x0, x1, MAXIT, TOL):
     if (func(a) * func(b) < 0):
         itera = 0
         err = 1
-        iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
-        errl = []  #Lista que almacena el % de error de cada iteracion para despues graficar
+        iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
+        errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
         xAprox = 0
         x2 = x1 - ((x1 - x0) / (func(x1) - func(x0))) * func(x1)
         if (func(a) * func(x2) < 0):
@@ -54,9 +55,11 @@ def falsaPosicion(func, x0, x1, MAXIT, TOL):
             grafica(iterl, errl)
             return xAprox, err
         else:
-            raise ValueError("Las condiciones no garantizan el cero de la funcion")
+            raise ValueError(
+                "Las condiciones no garantizan el cero de la funcion")
     else:
         raise ValueError("Las condiciones no garantizan el cero de la funcion")
+
 
 def grafica(listaValoresX, listaValoresY):
     '''
@@ -71,17 +74,18 @@ def grafica(listaValoresX, listaValoresY):
     plt.ylabel("% Error")
     plt.show()
 
+
 if __name__ == '__main__':
-    #Intervalos
+    # Intervalos
     x0 = 1 / 2
     x1 = (math.pi) / 4
-    #Tolerancia
+    # Tolerancia
     TOL = 0.00001
-    #Maximo iteraciones
+    # Maximo iteraciones
     MAXIT = 100
-    #Funcion
-    func = lambda x: math.cos(x) - x
-    #Llamado de la funcion
+    # Funcion
+    def func(x): return math.cos(x) - x
+    # Llamado de la funcion
     xAprox, err = falsaPosicion(func, x0, x1, MAXIT, TOL)
     print("######################################################")
     print("Metodo de la Falsa Posicion \n")

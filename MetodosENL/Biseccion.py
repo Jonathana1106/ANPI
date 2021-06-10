@@ -3,6 +3,7 @@ import math
 import matplotlib.pyplot as plt
 ########################################################################################
 
+
 def biseccion(func, a, b, MAXIT, TOL):
     '''
     Metodo de la Biseccion
@@ -17,14 +18,14 @@ def biseccion(func, a, b, MAXIT, TOL):
     if(func(a) * func(b) < 0):
         itera = 1
         err = 1
-        iterl = [] #Lista que almacena el numero de iteraciones para despues graficar
-        errl = [] #Lista que almacena el % de error de cada iteracion para despues graficar
+        iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
+        errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
 
         while(itera < MAXIT):
             xAprox = (a + b) / 2
             fx = func(xAprox)
 
-            if(func(a) * fx  < 0):
+            if(func(a) * fx < 0):
                 b = xAprox
             elif(func(b) * fx < 0):
                 a = xAprox
@@ -40,7 +41,9 @@ def biseccion(func, a, b, MAXIT, TOL):
         grafica(iterl, errl)
         return xAprox, err
     else:
-        raise ValueError("Las condiciones  no garantizan el cero de la funcion.")
+        raise ValueError(
+            "Las condiciones  no garantizan el cero de la funcion.")
+
 
 def grafica(listaValoresX, listaValoresY):
     '''
@@ -55,17 +58,18 @@ def grafica(listaValoresX, listaValoresY):
     plt.ylabel("% Error")
     plt.show()
 
+
 if __name__ == '__main__':
-    #Intervalos
+    # Intervalos
     a = 0
     b = 2
-    #Tolerancia
+    # Tolerancia
     TOL = 0.0001
-    #Maximo iteraciones
+    # Maximo iteraciones
     MAXIT = 100
-    #Funcion
-    func = lambda x: math.e**x - x - 2
-    #Llamado de la funcion
+    # Funcion
+    def func(x): return math.e**x - x - 2
+    # Llamado de la funcion
     xAprox, err = biseccion(func, a, b, MAXIT, TOL)
     print("######################################################")
     print("Metodo de la Biseccion\n")

@@ -3,6 +3,7 @@ import math
 import matplotlib.pyplot as plt
 ########################################################################################
 
+
 def secante(func, x0, x1, MAXIT, TOL):
     '''
     Metodo de la Secante
@@ -16,12 +17,12 @@ def secante(func, x0, x1, MAXIT, TOL):
     '''
     itera = 2
     err = 1
-    iterl = []  #Lista que almacena el numero de iteraciones para despues graficar
-    errl = []  #Lista que almacena el % de error de cada iteracion para despues graficar
+    iterl = []  # Lista que almacena el numero de iteraciones para despues graficar
+    errl = []  # Lista que almacena el % de error de cada iteracion para despues graficar
     xAprox = x0
 
     while(itera < MAXIT):
-        xAprox = x1 - ((x1 - x0)/(func(x1) - func(x0)))  * func(x1)
+        xAprox = x1 - ((x1 - x0)/(func(x1) - func(x0))) * func(x1)
         err = abs(xAprox - x1)/abs(xAprox)
         iterl.append(itera)
         errl.append(err)
@@ -34,6 +35,7 @@ def secante(func, x0, x1, MAXIT, TOL):
             x1 = xAprox
     grafica(iterl, errl)
     return xAprox, err
+
 
 def grafica(listaValoresX, listaValoresY):
     '''
@@ -48,17 +50,18 @@ def grafica(listaValoresX, listaValoresY):
     plt.ylabel("% Error")
     plt.show()
 
+
 if __name__ == '__main__':
-    #Valores iniciales
+    # Valores iniciales
     x0 = 0
     x1 = 1
-    #Tolerancia
+    # Tolerancia
     TOL = 0.01
-    #Maximo iteraciones
+    # Maximo iteraciones
     MAXIT = 100
-    #Funcion
-    func = lambda x: (math.e)**(-(x**2)) - x
-    #Llamado de la funcion
+    # Funcion
+    def func(x): return (math.e)**(-(x**2)) - x
+    # Llamado de la funcion
     xAprox, err = secante(func, x0, x1, MAXIT, TOL)
     print("######################################################")
     print("Metodo de la Secante \n")
